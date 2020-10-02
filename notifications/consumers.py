@@ -22,16 +22,20 @@ class NotificationConsumer(WebsocketConsumer):
         self.close()
         # pass
 
-    # Custom Notify Function which can be called from Views or api to send message to the frontend
-    def notify(self, event):
-        self.send(text_data=json.dumps(event["text"]))
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
 
-    def test_notification(self, message):
+        # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
-            '1',
+            self.room_group_name,
             {
                 'type': 'notify',
                 'text': message
             }
         )
+
+    # Custom Notify Function which can be called from Views or api to send message to the frontend
+    def notify(self, event):
+        self.send(text_data=json.dumps(event["text"]))
 

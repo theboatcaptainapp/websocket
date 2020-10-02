@@ -3,7 +3,16 @@
 {% block content %}
 
 <h3>Home</h3>
+<button id="send_button">Test</button>
 
+<script>
+    document.querySelector('#send_button').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'test'
+            }));
+            messageInputDom.value = '';
+        };
+</script>
 {% endblock content %}
 
 
