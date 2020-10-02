@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['139.59.253.71']
 
 INSTALLED_APPS = [
     'notifications',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +69,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'channels_notifications.wsgi.application'
 ASGI_APPLICATION = "channels_notifications.routing.application" 
 
 # Database
