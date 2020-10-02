@@ -25,7 +25,7 @@ SECRET_KEY = 'ipe&hoj8-plc=c0-@6=l$j@6fv7w(8_zwbd-%uw94fygr_r81v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['139.59.253.71']
 
 
 # Application definition
