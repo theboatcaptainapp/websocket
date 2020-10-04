@@ -8,7 +8,8 @@
 <script>
     document.querySelector('#send_button').onclick = function(e) {
             socket.send(JSON.stringify({
-                'message': 'test'
+                'message': 'test',
+                'user':'{{request.user.id}}'
             }));
         };
 </script>
