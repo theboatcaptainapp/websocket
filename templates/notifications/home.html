@@ -10,9 +10,9 @@
 <script>
     document.getElementById('send_button').addEventListener('click', function(e) {
         e.preventDefault()
-            var message = document.getElementById('message_input').value
+            var message = document.getElementById('message_input')
             socket.send(JSON.stringify({
-                'message': message.val(),
+                'message': message.value,
                 'user':'{{request.user.id}}'
             }));
         });
