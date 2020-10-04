@@ -31,12 +31,6 @@
             var socket = new WebSocket(webSocketEndpoint) // Creating a new Web Socket Connection
         
             // Socket On receive message Functionality
-            socket.onmessage = function(e){
-                console.log('message', e)
-                console.log(e.data) // Access the notification data
-                //$("body").append("<h3>"+e.data+"</h3>")
-                // Can write any functionality based on your requirement
-            }
         
             // Socket Connet Functionality
             socket.onopen = function(e){
