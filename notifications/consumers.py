@@ -1,7 +1,7 @@
 from channels.generic.websocket import WebsocketConsumer
 import json
 from asgiref.sync import async_to_sync
-
+from pprint import pprint
 
 class NotificationConsumer(WebsocketConsumer):
     
@@ -13,7 +13,7 @@ class NotificationConsumer(WebsocketConsumer):
             self.close()
         else:
             # print(self.scope["user"])   # Can access logged in user details by using self.scope.user, Can only be used if AuthMiddlewareStack is used in the routing.py
-            self.group_name = str(self.scope["user"].pk)  # Setting the group name as the pk of the user primary key as it is unique to each user. The group name is used to communicate with the user.
+            self.group_name = "test"  # Setting the group name as the pk of the user primary key as it is unique to each user. The group name is used to communicate with the user.
             async_to_sync(self.channel_layer.group_add)(self.group_name, self.channel_name)
             self.accept()
 
@@ -24,11 +24,12 @@ class NotificationConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
+        pprint(text_data_json)
         message = text_data_json['message']
 
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
-            '1',
+            'test',
             {
                 'type': 'notify',
                 'text': message
