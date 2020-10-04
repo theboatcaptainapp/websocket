@@ -4,13 +4,13 @@
 
 <h3>Home</h3>
 <form id="message_form">
-    <input type="text">
+    <input type="text" id="message_input">
     <button id="send_button" type="submit">send</button>
 </form>
 <script>
     document.getElementById('send_button').addEventListener('click', function(e) {
         e.preventDefault()
-            var message = document.getElementById('send_button')
+            var message = document.getElementById('message_input').value
             socket.send(JSON.stringify({
                 'message': message.val(),
                 'user':'{{request.user.id}}'
