@@ -40,7 +40,10 @@
             socket.onmessage = function(e){
             console.log('message', e)
             console.log(e.data) 
-            message_list.append("<p>"+e.data+"</p>")
+            var message_p = document.createElement('p')
+            var message_content = document.createTextNode(e.data)
+            message_p.appendChild(message_content)
+            document.getElementById('message_list').append(message_p)
             }
         
             // Socket Error Functionality
