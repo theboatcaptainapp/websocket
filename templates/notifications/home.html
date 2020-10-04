@@ -8,13 +8,14 @@
     <button id="send_button" type="submit">send</button>
 </form>
 <script>
-    document.querySelector('#message_button').onsubmit = function(e) {
+    document.getElementById('#message_button').addEventListener('click', function(e) {
+        e.preventDefault()
             var message = document.getElementById('send_button')
             socket.send(JSON.stringify({
                 'message': message.val(),
                 'user':'{{request.user.id}}'
             }));
-        };
+        });
 </script>
 {% endblock content %}
 
