@@ -3,12 +3,12 @@
 {% block content %}
 
 <h3>Home</h3>
-<form action="post">{% csrf_token %}
+<form action="POST" id="message_form">{% csrf_token %}
     <input type="text">
-    <button id="send_button">send</button>
+    <button id="send_button" type="submit">send</button>
 </form>
 <script>
-    document.querySelector('#send_button').onclick = function(e) {
+    document.querySelector('#message_button').onsubmit = function(e) {
             var message = document.getElementById('send_button')
             socket.send(JSON.stringify({
                 'message': message.val(),
