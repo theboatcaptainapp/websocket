@@ -36,6 +36,12 @@
             socket.onopen = function(e){
                 console.log('open', e)
             }
+
+            socket.onmessage = function(e){
+            console.log('message', e)
+            console.log(e.data) 
+            message_list.append("<p>"+e.data+"<p>")
+            }
         
             // Socket Error Functionality
             socket.onerror = function(e){
