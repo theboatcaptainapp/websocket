@@ -39,8 +39,8 @@
 
             socket.onmessage = function(e){
             console.log('message', e)
-            console.log(e.data) 
-            document.getElementById('message_list').append("<p>"+e.data+"</p>")
+            message_data = JSON.parse(e.data)
+            document.getElementById('message_list').append(message_data)
             }
         
             // Socket Error Functionality
