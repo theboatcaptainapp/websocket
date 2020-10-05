@@ -26,13 +26,15 @@ class NotificationConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         pprint(text_data_json)
         message = text_data_json['message']
+        user = text_data_json['user']
 
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
             'test',
             {
                 'type': 'notify',
-                'text': message
+                'text': message,
+                'user': user
             }
         )
 
