@@ -33,7 +33,7 @@ class NotificationConsumer(WebsocketConsumer):
             'test',
             {
                 'type': 'notify',
-                'text': [message, user],
+                'text': ['message':message, 'user':user},
             }
         )
 
