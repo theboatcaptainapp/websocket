@@ -19,43 +19,7 @@
     </body>
 
     <footer>
-        <script>
-            var loc = window.location
-            var wsStart = "ws://"
-            if (loc.protocol == "https:"){
-                wsStart = "wss://"
-            }
-            var webSocketEndpoint =  wsStart + loc.host + '/notifications/'  // ws : wss   // Websocket URL, Same on as mentioned in the routing.py
         
-        
-            var socket = new WebSocket(webSocketEndpoint) // Creating a new Web Socket Connection
-        
-            // Socket On receive message Functionality
-        
-            // Socket Connet Functionality
-            socket.onopen = function(e){
-                console.log('open', e)
-            }
-
-            socket.onmessage = function(e){
-            console.log('message', e)
-            message_data = JSON.parse(e.data)
-            message_display = document.createElement('p')
-            message_display.appendChild(document.createTextNode(message_data.message + message_data.user))
-            document.getElementById('message_list').appendChild(message_display)
-            }
-        
-            // Socket Error Functionality
-            socket.onerror = function(e){
-                console.log('error', e)
-            }
-        
-            // Socket close Functionality
-            socket.onclose = function(e){
-                console.log('closed', e)
-            }
-            
-        </script>
     </footer>
 
 </html>
