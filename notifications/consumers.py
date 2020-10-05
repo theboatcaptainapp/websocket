@@ -1,9 +1,9 @@
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from asgiref.sync import async_to_sync
 from pprint import pprint
 
-class NotificationConsumer(WebsocketConsumer):
+class NotificationConsumer(AsyncWebsocketConsumer):
     
     # Function to connect to the websocket
     async def connect(self):
