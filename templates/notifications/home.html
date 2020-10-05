@@ -38,6 +38,7 @@
     message_display = document.createElement('p')
     message_display.appendChild(document.createTextNode(message_data.message + message_data.user))
     document.getElementById('message_list').appendChild(message_display)
+    play()
     }
 
     // Socket Error Functionality
@@ -62,6 +63,14 @@
         });
 
 </script>
+<script> 
+    function play() { 
+        var audio = new Audio( 
+        'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+        audio.play(); 
+    } 
+</script>
+
 {% endblock content %}
 
 
