@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Conversation(models.Model):
     """owner, opponent, last_active"""
-    name = models.CharField()
+    name = models.CharField(max_length=100)
     last_active = models.DateTimeField(auto_now_add=True)
 
 
