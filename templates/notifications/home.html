@@ -5,7 +5,9 @@
 <h3>Home</h3>
 
 <div id="message_list">
-
+    {% for message in messages %}
+        <p>{{message.sender.username}}: {{message.body}}</p>
+    {% endfor %}
 </div>
 
 <form id="message_form">
@@ -36,7 +38,7 @@
     console.log('message', e)
     message_data = JSON.parse(e.data)
     message_display = document.createElement('p')
-    message_display.appendChild(document.createTextNode(message_data.message + message_data.user))
+    message_display.appendChild(document.createTextNode(message_data.user + ": " + message_data.message))
     document.getElementById('message_list').appendChild(message_display)
     }
 
