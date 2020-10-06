@@ -34,8 +34,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         user_id = text_data_json['user']
         user = await self.get_user(user_id)
         conversation = await self.get_or_create_conversation(self.group_name)
-        await self.save_message(message, user, conversation)
-
+        print(conversation)
+        try: 
+            await self.save_message(message, user, conversation)
+        except:
+            print('failed')
         # Send message to room group
         await self.channel_layer.group_send(
             'test',
