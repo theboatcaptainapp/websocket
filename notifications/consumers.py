@@ -2,8 +2,13 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 from asgiref.sync import async_to_sync
 from pprint import pprint
+from .models import Conversation, Message
+from channels.db import database_sync_to_async
+from django.contrib.auth.models import User
 
-class NotificationConsumer(AsyncWebsocketConsumer):
+
+
+class ChatConsumer(AsyncWebsocketConsumer):
     
     # Function to connect to the websocket
     async def connect(self):
@@ -26,7 +31,10 @@ class NotificationConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        user = text_data_json['user']
+        user_id = text_data_json['user']
+        user = await self.get_user(user_id)
+        conversation = await self.get_or_create_conversation(self.group_name)
+        await self.save_message(message, user, conversation)
 
         # Send message to room group
         await self.channel_layer.group_send(
@@ -37,7 +45,26 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             }
         )
 
-    # Custom Notify Function which can be called from Views or api to send message to the frontend
+
     async def send_message(self, event):
         await self.send(text_data=json.dumps(event["text"]))
 
+
+    @database_sync_to_async
+    def save_message(self, msg_body, user, conversation):
+        return Message.objects.create(conversation=conversation, sender=user, body=msg_body)
+
+    @database_sync_to_async
+    def get_user(self, user_id):
+        user_id = int(user_id)
+        return User.objects.get(id=user_id)
+                
+    @database_sync_to_async
+    def get_or_create_conversation(self, name):
+        try:
+            Conversation.objects.get(name=name)
+            print('conversation exists')
+        except:
+            Conversation.objects.create(name=name)
+            print('conversation created')
+    

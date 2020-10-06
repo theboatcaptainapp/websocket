@@ -3,7 +3,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter, ChannelNameRouter
 from channels.auth import AuthMiddlewareStack
 from channels.security.websocket import AllowedHostsOriginValidator, OriginValidator
 
-from notifications.consumers import NotificationConsumer  # Importing notification Consumer from consumers.py
+from notifications.consumers import ChatConsumer  # Importing notification Consumer from consumers.py
 
 application = ProtocolTypeRouter({ 
     # Websocket chat handler
@@ -11,7 +11,7 @@ application = ProtocolTypeRouter({
         AuthMiddlewareStack(  # Session Authentication, required to use if we want to access the user details in the consumer 
             URLRouter(
                 [
-                    path("notifications/", NotificationConsumer),    # Url path for connecting to the websocket to send notifications.
+                    path("notifications/", ChatConsumer),    # Url path for connecting to the websocket to send notifications.
                 ]
             )
         ),
