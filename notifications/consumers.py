@@ -44,7 +44,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'test',
             {
                 'type': 'send_message',
-                'text': {'message':message, 'user':user},
+                'text': {'message':message, 'user':user.username},
             }
         )
 
@@ -65,9 +65,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def get_or_create_conversation(self, name):
         try:
-            Conversation.objects.get(name=name)
+            conversation = Conversation.objects.get(name=name)
             print('conversation exists')
+
         except:
-            Conversation.objects.create(name=name)
+            conversation = Conversation.objects.create(name=name)
             print('conversation created')
-    
+        
+        return conversation
